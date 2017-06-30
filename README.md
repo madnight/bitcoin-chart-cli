@@ -1,8 +1,16 @@
 # bitcoin-chart-cli
 [![Build Status](https://travis-ci.org/madnight/bitcoin-chart-cli.svg?branch=master)](https://travis-ci.org/madnight/bitcoin-chart-cli)
 
-
 Bitcoin chart for the terminal as command line util
+
+### Usage
+```bash
+git clone https://github.com/madnight/bitcoin-chart-cli.git
+cd bitcoin-chart-cli
+npm install
+npm start
+```
+npm package will follow soon.
 
 ```bash
 3018.55 ┤                                                                     ╭╮                  
@@ -20,4 +28,5 @@ Bitcoin chart for the terminal as command line util
 1373.03 ┤                        ╭────╯                                                           
 1235.90 ┤   ╭────────────────────╯                                                                
 1098.78 ┼───╯                                                                                     
+		 Bitcoin Chart from 2017-04-02 to 2017-07-01                                                                       
 ```
