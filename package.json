@@ -13,8 +13,13 @@
   "dependencies": {
     "asciichart": "^0.1.7",
     "axios": "^0.16.2",
+    "eslint": "^4.1.1",
     "lodash": "^4.17.4",
     "lodash-fp": "^0.10.4",
     "moment": "^2.18.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.1.1"
   }
 }
