@@ -10,7 +10,7 @@ console.log(q)
 const coindesk = `http://api.coindesk.com/v1/bpi/historical/close.json?start=${q}&end=${today}`
 
 const bitcoin = async (url) => {
-  const res = await axios.get(url)
+    const res = await axios.get(url)
     const data = _.flow(
       _.get('data.bpi'),
       _.values
