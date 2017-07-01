@@ -53,5 +53,7 @@ bitcoin-chart-cli --help
 1373.03 ┤                        ╭────╯
 1235.90 ┤   ╭────────────────────╯
 1098.78 ┼───╯
-		 Bitcoin Chart from 2017-04-02 to 2017-07-01
+		 Bitcoin chart from 2017-04-02 to 2017-07-01
+		 Bitcoin current price 2447.64 US-Dollar / 2142.44 Euro
 ```
+                 
