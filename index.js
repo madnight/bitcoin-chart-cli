@@ -8,7 +8,7 @@ const param = require('commander')
 
 // command line parsing
 param
-    .version('1.0.0')
+    .version('1.0.1')
     .option('-d, --days <n>', 'number of days the chart will go back', parseInt)
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
