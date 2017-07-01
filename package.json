@@ -1,15 +1,31 @@
 {
   "name": "bitcoin-chart-cli",
   "version": "1.0.0",
-  "description": "",
+  "license": "MIT",
+  "author": "Fabian Beuke <mail@beuke.org>",
+  "description": "Bitcoin chart for the terminal as command line util",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "bitcoin-chart-cli": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madnight/bitcoin-chart-cli.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "chart",
+    "cli"
+  ],
+  "bugs": {
+    "url": "https://github.com/madnight/bitcoin-chart-cli/issues"
+  },
+  "homepage": "https://github.com/madnight/bitcoin-chart-cli#readme",
   "dependencies": {
     "asciichart": "^0.1.7",
     "axios": "^0.16.2",
