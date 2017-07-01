@@ -1,15 +1,22 @@
+#!/usr/bin/env node
+
 const _ = require('lodash/fp')
 const axios = require('axios')
 const moment = require('moment')
 const asciichart = require ('asciichart')
+const param = require('commander')
 
 // command line parsing
-// https://github.com/tj/commander.js/
+param
+    .version('1.0.0')
+    .option('-d, --days <n>', 'number of days the chart will go back', parseInt)
+    .option('-w, --width <n>', 'max terminal chart width', parseInt)
+    .option('-h, --height <n>', 'max terminal chart height', parseInt)
+    .parse(process.argv)
 
-// Options
-const days = 300      // number of days the chart will go back
-const maxWidth = 100 // max terminal chart width
-const maxHeight = 20 // max terminal chart height
+const days = _.defaultTo(300)(param.days)
+const maxWidth = _.defaultTo(100)(param.width)
+const maxHeight = _.defaultTo(14)(param.height)
 
 const today = moment().format('YYYY-MM-DD')
 const past = moment().subtract(days, 'days').format('YYYY-MM-DD')

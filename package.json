@@ -13,6 +13,7 @@
   "dependencies": {
     "asciichart": "^0.1.7",
     "axios": "^0.16.2",
+    "commander": "^2.10.0",
     "eslint": "^4.1.1",
     "lodash": "^4.17.4",
     "moment": "^2.18.1"
