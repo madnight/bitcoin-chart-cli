@@ -3,6 +3,10 @@
 
 Bitcoin chart for the terminal as command line util
 
+### Requirements
+ * node 8.0 or higher (need fancy syntax features thats why 8+)
+ * npm or yarn
+
 ### Usage
 ```bash
 git clone https://github.com/madnight/bitcoin-chart-cli.git
