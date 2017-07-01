@@ -15,7 +15,6 @@
     "axios": "^0.16.2",
     "eslint": "^4.1.1",
     "lodash": "^4.17.4",
-    "lodash-fp": "^0.10.4",
     "moment": "^2.18.1"
   },
   "devDependencies": {
