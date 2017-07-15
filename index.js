@@ -6,16 +6,17 @@ const axios = require('axios')
 const moment = require('moment')
 const asciichart = require ('asciichart')
 const param = require('commander')
+const wrap = require('word-wrap')
 
-// command line parsing
 param
-    .version('1.0.1')
+    .version('1.0.2')
     .option('-d, --days <n>', 'number of days the chart will go back', parseInt)
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
+    .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
 
-const days = defaultTo(300)(param.days)
+const days = defaultTo(90)(param.days)
 const maxWidth = defaultTo(100)(param.width)
 const maxHeight = defaultTo(14)(param.height)
 
@@ -47,8 +48,10 @@ const main = async () => {
     const fetchApi = [bitcoin(coindesk), current(coindeskCurrent)]
     const [history, [dollar, euro]] = await Promise.all(fetchApi)
     console.log(asciichart.plot (history, { height: maxHeight }))
-    console.log(`\t\t Bitcoin chart from ${past} to ${today}`)
-    console.log(`\t\t Bitcoin current price ${dollar} US-Dollar / ${euro} Euro`)
+    if (!param.disableLegend) {
+        const legend = `\t\tBitcoin chart past ${days} days ${past} to ${today}. Current ${dollar}$ / ${euro}€.`
+        console.log(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
+    }
 }
 
 main()

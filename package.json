@@ -32,7 +32,8 @@
     "commander": "^2.10.0",
     "eslint": "^4.1.1",
     "lodash": "^4.17.4",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
