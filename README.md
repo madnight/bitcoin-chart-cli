@@ -54,8 +54,9 @@ bitcoin-chart-cli
 bitcoin-chart-cli --l
 ```
 
-![](https://i.imgur.com/A20lYxG.png)
+![](https://i.imgur.com/cTtFxy6.png)
 
 ```bash
-bitcoin-chart-cli --ethereum -d 58 -h 10
+In combination with conky
+conky.text = [[ ${execi 120 bitcoin-chart-cli -e -w 140 -h 15} ]];
 ```
