@@ -5,4 +5,11 @@ node_js:
 
 script:
   - npm start
+  - node index.js -e
+  - node index.js -l
+  - node index.js -r
+  - node index.js -d 2000
+  - node index.js -r -d 800
+  - node index.js -w 200 -h 80
+  - node index.js -w 80 -h 5
   - npm run lint
