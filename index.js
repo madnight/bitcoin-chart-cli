@@ -33,10 +33,10 @@ const coins = [
 const [coin, coinname] = flow(remove(negate(first)), first, tail)(coins)
 const today = moment().format('YYYY-MM-DD')
 const past = moment().subtract(days, 'days').format('YYYY-MM-DD')
-const coindesk = `https://min-api.cryptocompare.com/data/histoday?fsym=${coin}&tsym=USD&limit=${days}&e=CCCAGG`
-const coindeskCurrent = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=USD,EUR`
-
+const ccApi = `https://min-api.cryptocompare.com/data/histoday?fsym=${coin}&tsym=USD&limit=${days}&e=CCCAGG`
+const ccApiCurrent = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=USD,EUR`
 const current = async url => (await axios.get(url)).data
+const print = string => process.stdout.write(string + '\n')
 
 const bitcoin = async url => {
     const res = await axios.get(url)
@@ -49,12 +49,12 @@ const bitcoin = async url => {
 }
 
 const main = async () => {
-    const fetchApi = [bitcoin(coindesk), current(coindeskCurrent)]
+    const fetchApi = [bitcoin(ccApi), current(ccApiCurrent)]
     const [history, {USD, EUR}] = await Promise.all(fetchApi)
-    console.log(asciichart.plot (history, { height: maxHeight }))
+    print(asciichart.plot (history, { height: maxHeight }))
     if (!param.disableLegend) {
         const legend = `\t\t${coinname} chart past ${days} days ${past} to ${today}. Current ${USD}$ / ${EUR}€.`
-        console.log(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
+        print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
     }
 }
 
