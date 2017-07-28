@@ -51,11 +51,9 @@ const bitcoin = async url => {
 const main = async () => {
     const fetchApi = [bitcoin(ccApi), current(ccApiCurrent)]
     const [history, {USD, EUR}] = await Promise.all(fetchApi)
+    const legend = `\t\t${coinname} chart past ${days} days ${past} to ${today}. Current ${USD}$ / ${EUR}€.`
     print(asciichart.plot (history, { height: maxHeight }))
-    if (!param.disableLegend) {
-        const legend = `\t\t${coinname} chart past ${days} days ${past} to ${today}. Current ${USD}$ / ${EUR}€.`
-        print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
-    }
+    return !param.disableLegend && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
 }
 
 main()

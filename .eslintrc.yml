@@ -1,11 +1,20 @@
 env:
   es6: true
   node: true
-extends: 'eslint:recommended'
+
+extends:
+  - eslint:recommended
+  - cleanjs
+
 parser: 'babel-eslint'
 parserOptions:
   sourceType: module
+
 rules:
+  import/no-commonjs:
+    - off # nodejs does not have this
+  fp/no-unused-expression:
+    - off # false positives
   indent:
     - error
     - 4

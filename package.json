@@ -31,12 +31,16 @@
     "axios": "^0.16.2",
     "commander": "^2.10.0",
     "eslint": "^4.1.1",
+    "eslint-config-cleanjs": "^4.0.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^4.1.1"
+    "eslint": "^4.1.1",
+    "eslint-plugin-better": "^0.1.5",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.7.0"
   }
 }
