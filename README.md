@@ -17,6 +17,9 @@ Bitcoin chart for the terminal as command line util
 
 ```bash
 # install
+npm install bitcoin-chart-cli -g
+
+# (alternative) install with yarn
 yarn global add bitcoin-chart-cli
 
 # run default
@@ -35,15 +38,44 @@ bitcoin-chart-cli --help
 
   Options:
 
-    -V, --version     output the version number
-    -d, --days <n>    number of days the chart will go back
-    -w, --width <n>   max terminal chart width
-    -h, --height <n>  max terminal chart height
-    -e, --ethereum    show ethereum chart instead of bitoin
-    -l, --litecoin    show litecoin chart instead of bitoin
-    -r, --ripple      show ripple chart instead of bitoin
-    --disable-legend  disable legend text
-    -h, --help        output usage information
+    -V, --version      output the version number
+    -d, --days <n>     number of days the chart will go back
+    --hours <n>        number of hours the chart will go back
+    --mins <n>         number of minutes the chart will go back
+    -w, --width <n>    max terminal chart width
+    -h, --height <n>   max terminal chart height
+    --disable-legend   disable legend text
+    --antshares        show antshares chart
+    --bytecoin         show bytecoin chart
+    --bitcoin          show bitcoin chart
+    --bitshares        show bitshares chart
+    --dash             show dash chart
+    --antshares        show antshares chart
+    --digibyte         show digibyte chart
+    --dogecoin         show dogecoin chart
+    --eos              show eos chart
+    --ethereumClassic  show ethereumClassic chart
+    --ethereum         show ethereum chart
+    --gnosis           show gnosis chart
+    --golem            show golem chart
+    --iota             show iota chart
+    --iconomi          show iconomi chart
+    --litecoin         show litecoin chart
+    --metal            show metal chart
+    --peercoin         show peercoin chart
+    --qtum             show qtum chart
+    --siacoin          show siacoin chart
+    --status           show status chart
+    --stratis          show stratis chart
+    --steem            show steem chart
+    --viacoin          show viacoin chart
+    --waves            show waves chart
+    --nem              show nem chart
+    --primecoin        show primecoin chart
+    --monero           show monero chart
+    --ripple           show ripple chart
+    --zcash            show zcash chart
+    -h, --help         output usage information
 
 ```
 # Examples
@@ -57,12 +89,12 @@ bitcoin-chart-cli
 ![](https://i.imgur.com/gg5kRYG.png)
 
 ```bash
-bitcoin-chart-cli --l
+bitcoin-chart-cli --litecoin
 ```
 
 ![](https://i.imgur.com/cTtFxy6.png)
 
 ```bash
 In combination with conky
-conky.text = [[ ${execi 120 bitcoin-chart-cli -e -w 140 -h 15} ]];
+conky.text = [[ ${execi 120 bitcoin-chart-cli --ethereum -w 140 -h 15} ]];
 ```

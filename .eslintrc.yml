@@ -15,6 +15,9 @@ rules:
     - off # nodejs does not have this
   fp/no-unused-expression:
     - off # false positives
+  fp/no-mutation:
+    - error
+    - commonjs: true # allow export statement
   indent:
     - error
     - 4

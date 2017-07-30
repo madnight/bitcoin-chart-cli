@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-const {get, defaultTo, map,
-    flow, remove, chunk, ceil,
-    mean, negate, first, tail} = require('lodash/fp')
+const {get, defaultTo, map, lowerFirst,
+    flow, remove, chunk, ceil, last, isEmpty,
+    mean, negate, first} = require('lodash/fp')
 const axios = require('axios')
 const moment = require('moment')
 const asciichart = require ('asciichart')
 const param = require('commander')
 const wrap = require('word-wrap')
+const {coins} = require('./coins')
 
 param
     .version('1.1.2')
@@ -16,28 +17,28 @@ param
     .option('--mins <n>', 'number of minutes the chart will go back', parseInt)
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
-    .option('-e, --ethereum', 'show ethereum chart instead of bitoin')
-    .option('-l, --litecoin', 'show litecoin chart instead of bitoin')
-    .option('-r, --ripple', 'show ripple chart instead of bitoin')
     .option('--disable-legend', 'disable legend text')
-    .parse(process.argv)
+
+const addCoin = coin => param.option(`--${coin}`, `show ${coin} chart`)
+
+// add coins from coins.js
+flow(map(flow(last, lowerFirst, addCoin)))(coins)
+param.parse(process.argv)
 
 const days = defaultTo(90)(param.days)
 const maxWidth = defaultTo(100)(param.width)
 const maxHeight = defaultTo(14)(param.height)
-const coins = [
-    [param.ethereum, 'ETH', 'Ethereum'],
-    [param.litecoin, 'LTC', 'Litecoin'],
-    [param.ripple, 'XRP', 'Ripple'],
-    [true, 'BTC', 'Bitcoin']
-]
+
 const time = [
     [param.mins, 'minutes', 'histominute'],
     [param.hours, 'hours', 'histohour'],
     [days, 'days', 'histoday']
 ]
+
+const paramSet = p => param[p]
 const [timePast, timeName, timeApi] = flow(remove(negate(first)), first)(time)
-const [coin, coinname] = flow(remove(negate(first)), first, tail)(coins)
+const defaultToBitcoin = x => isEmpty(x) ? ['BTC', 'Bitcoin'] : first(x)
+const [coin, coinname] = flow(remove(negate(flow(last, lowerFirst, paramSet))), defaultToBitcoin)(coins)
 const timeFormat = 'YYYY-MM-DD hh:mm a'
 const past = moment().subtract(timePast, timeName).format(timeFormat)
 const ccApi = `https://min-api.cryptocompare.com/data/${timeApi}?fsym=${coin}&tsym=USD&limit=${timePast}&e=CCCAGG`
