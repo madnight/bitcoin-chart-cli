@@ -5,11 +5,19 @@ node_js:
 
 script:
   - npm start
-  - node index.js -e
-  - node index.js -l
-  - node index.js -r
+  - node index.js
+  - node index.js --ethereum
+  - node index.js --litecoin
+  - node index.js --ripple
+  - node index.js --antshares
+  - node index.js --monero --hours 90
+  - node index.js --qtum --hours 20
+  - node index.js --viacoin --mins 120
+  - node index.js --nem --mins 30
+  - node index.js --nem --mins 30 --disable-legend
   - node index.js -d 2000
-  - node index.js -r -d 800
+  - node index.js --dash -d 800
   - node index.js -w 200 -h 80
   - node index.js -w 80 -h 5
+  - node index.js --golem --mins 60 -w 80 -h 5
   - npm run lint
