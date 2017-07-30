@@ -98,3 +98,4 @@ bitcoin-chart-cli --litecoin
 In combination with conky
 conky.text = [[ ${execi 120 bitcoin-chart-cli --ethereum -w 140 -h 15} ]];
 ```
+More examples https://travis-ci.org/madnight/bitcoin-chart-cli
