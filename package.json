@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-chart-cli",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "license": "MIT",
   "author": "Fabian Beuke <mail@beuke.org>",
   "description": "Bitcoin chart for the terminal as command line util",
