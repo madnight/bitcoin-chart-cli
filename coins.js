@@ -4,7 +4,7 @@ exports.coins = [
     ['BTC'     , 'Bitcoin'         ] ,
     ['BTS'     , 'Bitshares'       ] ,
     ['DASH'    , 'Dash'            ] ,
-    ['DCR'     , 'Antshares'       ] ,
+    ['DCR'     , 'Decred'          ] ,
     ['DGB'     , 'Digibyte'        ] ,
     ['DOGE'    , 'Dogecoin'        ] ,
     ['EOS'     , 'Eos'             ] ,
