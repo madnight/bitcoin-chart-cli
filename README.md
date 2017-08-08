@@ -26,57 +26,28 @@ yarn global add bitcoin-chart-cli
 bitcoin-chart-cli
 
 # run with options
-bitcoin-chart-cli -d 360 -w 80 -h 20
+bitcoin-chart-cli --coin ETH -d 360 -w 80 -h 20
 ```
 
 ### Options
 ```bash
 bitcoin-chart-cli --help
-    
+
+
   Usage: index [options]
 
 
   Options:
 
-    -V, --version      output the version number
-    -d, --days <n>     number of days the chart will go back
-    --hours <n>        number of hours the chart will go back
-    --mins <n>         number of minutes the chart will go back
-    -w, --width <n>    max terminal chart width
-    -h, --height <n>   max terminal chart height
-    --disable-legend   disable legend text
-    --antshares        show antshares chart
-    --bytecoin         show bytecoin chart
-    --bitcoin          show bitcoin chart
-    --bitshares        show bitshares chart
-    --dash             show dash chart
-    --antshares        show antshares chart
-    --digibyte         show digibyte chart
-    --dogecoin         show dogecoin chart
-    --eos              show eos chart
-    --ethereumClassic  show ethereumClassic chart
-    --ethereum         show ethereum chart
-    --gnosis           show gnosis chart
-    --golem            show golem chart
-    --iota             show iota chart
-    --iconomi          show iconomi chart
-    --litecoin         show litecoin chart
-    --metal            show metal chart
-    --peercoin         show peercoin chart
-    --qtum             show qtum chart
-    --siacoin          show siacoin chart
-    --status           show status chart
-    --stratis          show stratis chart
-    --steem            show steem chart
-    --viacoin          show viacoin chart
-    --waves            show waves chart
-    --nem              show nem chart
-    --primecoin        show primecoin chart
-    --monero           show monero chart
-    --ripple           show ripple chart
-    --zcash            show zcash chart
-    -h, --help         output usage information
-
+    -V, --version        output the version number
+    -d, --days <n>       number of days the chart will go back
+    --hours <n>          number of hours the chart will go back
+    --mins <n>           number of minutes the chart will go back
+    -w, --width <n>      max terminal chart width
+    -h, --height <n>     max terminal chart height
+    -c, --coin <string>  specify the coin e.g. ETH
+    --disable-legend     disable legend text
+    -h, --help           output usage information
 ```
 # Examples
 
@@ -89,13 +60,13 @@ bitcoin-chart-cli
 ![](https://i.imgur.com/gg5kRYG.png)
 
 ```bash
-bitcoin-chart-cli --litecoin
+bitcoin-chart-cli --coin LTC
 ```
 
 ![](https://i.imgur.com/cTtFxy6.png)
 
 ```bash
 In combination with conky
-conky.text = [[ ${execi 120 bitcoin-chart-cli --ethereum -w 140 -h 15} ]];
+conky.text = [[ ${execi 120 bitcoin-chart-cli --coin ETH -w 140 -h 15} ]];
 ```
 More examples https://travis-ci.org/madnight/bitcoin-chart-cli
