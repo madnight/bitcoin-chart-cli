@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-const {get, defaultTo, map, lowerFirst,
-    flow, remove, chunk, ceil, last, isEmpty,
-    mean, negate, first} = require('lodash/fp')
+const {get, defaultTo, map, flow,
+    remove, chunk, ceil, mean,
+    negate, first} = require('lodash/fp')
 const axios = require('axios')
 const moment = require('moment')
 const asciichart = require ('asciichart')
 const param = require('commander')
 const wrap = require('word-wrap')
-const {coins} = require('./coins')
+const print = string => process.stdout.write(string + '\n')
 
 param
     .version('2.0.0')
@@ -17,36 +17,37 @@ param
     .option('--mins <n>', 'number of minutes the chart will go back', parseInt)
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
+    .option('-c, --coin <string>', 'specify the coin e.g. ETH', 'BTC')
     .option('--disable-legend', 'disable legend text')
+    .parse(process.argv)
 
-const addCoin = coin => param.option(`--${coin}`, `show ${coin} chart`)
-
-// add coins from coins.js
-flow(map(flow(last, lowerFirst, addCoin)))(coins)
-param.parse(process.argv)
-
+// Prameter defaults
 const days = defaultTo(90)(param.days)
 const maxWidth = defaultTo(100)(param.width)
 const maxHeight = defaultTo(14)(param.height)
 
+// Time interval
 const time = [
     [param.mins, 'minutes', 'histominute'],
     [param.hours, 'hours', 'histohour'],
     [days, 'days', 'histoday']
 ]
-
-const paramSet = p => param[p]
 const [timePast, timeName, timeApi] = flow(remove(negate(first)), first)(time)
-const defaultToBitcoin = x => isEmpty(x) ? ['BTC', 'Bitcoin'] : first(x)
-const [coin, coinname] = flow(remove(negate(flow(last, lowerFirst, paramSet))), defaultToBitcoin)(coins)
 const timeFormat = 'YYYY-MM-DD hh:mm a'
 const past = moment().subtract(timePast, timeName).format(timeFormat)
-const ccApi = `https://min-api.cryptocompare.com/data/${timeApi}?fsym=${coin}&tsym=USD&limit=${timePast}&e=CCCAGG`
-const ccApiCurrent = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=USD,EUR`
-const current = async url => (await axios.get(url)).data
-const print = string => process.stdout.write(string + '\n')
 
-const bitcoin = async url => {
+// API Urls
+const baseApiURL = 'https://min-api.cryptocompare.com/data/'
+const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
+    + `&tsym=USD&limit=${timePast}&e=CCCAGG`
+const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=USD,EUR`
+const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist?Response'
+
+// API call functions
+const fetchCoinInfo = async url =>
+    get(`data.Data.${param.coin}`)(await axios.get(url))
+const fetchCoinCurrentPrice = async url => (await axios.get(url)).data
+const fetchCoinHistory = async url => {
     const res = await axios.get(url)
     return flow(
         get('data.Data'),
@@ -57,11 +58,22 @@ const bitcoin = async url => {
 }
 
 const main = async () => {
-    const fetchApi = [bitcoin(ccApi), current(ccApiCurrent)]
-    const [history, {USD, EUR}] = await Promise.all(fetchApi)
-    const legend = `\t${coinname} chart past ${timePast} ${timeName} since ${past}. Current ${USD}$ / ${EUR}€.`
+    const fetchApis = [
+        fetchCoinInfo(ccApiAll),
+        fetchCoinHistory(ccApiHist),
+        fetchCoinCurrentPrice(ccApiCurrent)
+    ]
+    const [{CoinName}, history, {USD, EUR}] = await Promise.all(fetchApis)
+    const legend = `\t${CoinName} chart past ${timePast}`
+        + ` ${timeName} since ${past}. Current ${USD}$ / ${EUR}€.`
     print(asciichart.plot (history, { height: maxHeight }))
-    return !param.disableLegend && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
+    return !param.disableLegend
+        && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
 }
 
 main()
+
+// Coin not found
+process.on('unhandledRejection', () =>
+    print(`Sorry. The coin ${param.coin} `
+        + 'you\'re looking for does not exist in the cryptocompare api.'))
