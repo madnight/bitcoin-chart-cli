@@ -11,7 +11,7 @@ const wrap = require('word-wrap')
 const print = string => process.stdout.write(string + '\n')
 
 param
-    .version('2.0.0')
+    .version('3.0.0')
     .option('-d, --days <n>', 'number of days the chart will go back', parseInt)
     .option('--hours <n>', 'number of hours the chart will go back', parseInt)
     .option('--mins <n>', 'number of minutes the chart will go back', parseInt)
