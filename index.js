@@ -21,7 +21,7 @@ param
     .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
 
-// Prameter defaults
+// Parameter defaults
 const days = defaultTo(90)(param.days)
 const maxWidth = defaultTo(100)(param.width)
 const maxHeight = defaultTo(14)(param.height)
