@@ -9,6 +9,8 @@
 
 Bitcoin chart for the terminal as command line util
 
+For a list of supported cryptocurrencies see [coins](COINS.md)
+
 ### Requirements
  * node 8.0 or higher (need fancy syntax features thats why 8+)
  * npm or yarn
