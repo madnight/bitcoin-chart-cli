@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const {get, defaultTo, map, flow,
-    remove, chunk, ceil, mean,
+const {get, defaultTo, map, flow, sortBy,
+    remove, chunk, ceil, mean, toLower, trim,
     negate, first} = require('lodash/fp')
 const axios = require('axios')
 const moment = require('moment')
@@ -18,6 +18,7 @@ param
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
     .option('-c, --coin <string>', 'specify the coin e.g. ETH', 'BTC')
+    .option('-l, --list', 'list all available coins')
     .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
 
@@ -41,23 +42,34 @@ const baseApiURL = 'https://min-api.cryptocompare.com/data/'
 const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
     + `&tsym=USD&limit=${timePast}&e=CCCAGG`
 const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=USD,EUR`
-const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist?Response'
+const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
 
 // API call functions
+const fetchCoinList = async url =>
+    flow(
+        get('data.Data'),
+        map('FullName')
+    )(await axios.get(url))
+
 const fetchCoinInfo = async url =>
     get(`data.Data.${param.coin}`)(await axios.get(url))
+
 const fetchCoinCurrentPrice = async url => (await axios.get(url)).data
-const fetchCoinHistory = async url => {
-    const res = await axios.get(url)
-    return flow(
+
+const fetchCoinHistory = async url =>
+    flow(
         get('data.Data'),
         map('close'),
         chunk(ceil(days/maxWidth)),
         map(mean)
-    )(res)
-}
+    )(await axios.get(url))
 
 const main = async () => {
+    if (param.list) // eslint-disable-line
+        return map(flow(trim, print))(
+            sortBy(flow(trim, toLower))(
+                await fetchCoinList(ccApiAll)))
+
     const fetchApis = [
         fetchCoinInfo(ccApiAll),
         fetchCoinHistory(ccApiHist),
@@ -66,6 +78,7 @@ const main = async () => {
     const [{CoinName}, history, {USD, EUR}] = await Promise.all(fetchApis)
     const legend = `\t${CoinName} chart past ${timePast}`
         + ` ${timeName} since ${past}. Current ${USD}$ / ${EUR}€.`
+
     print(asciichart.plot (history, { height: maxHeight }))
     return !param.disableLegend
         && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
