@@ -1,4 +1,5 @@
 # bitcoin-chart-cli
+[![npm](https://img.shields.io/npm/v/bitcoin-chart-cli.svg)](https://npmjs.com/package/bitcoin-chart-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/madnight/bitcoin-chart-cli.svg?branch=master)](https://travis-ci.org/madnight/bitcoin-chart-cli)
 [![Issue Count](https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000)](https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues)
