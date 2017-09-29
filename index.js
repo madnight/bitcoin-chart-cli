@@ -18,14 +18,15 @@ param
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
     .option('-c, --coin <string>', 'specify the coin e.g. ETH', 'BTC')
+    .option('-m, --market <string>', 'specify the market e.g. USD, EUR, BTC', 'USD')
     .option('-l, --list', 'list all available coins')
     .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
 
 // Parameter defaults
 const days = defaultTo(90)(param.days)
-const maxWidth = defaultTo(100)(param.width)
-const maxHeight = defaultTo(14)(param.height)
+const maxWidth = defaultTo(process.stdout.columns)(param.width)
+const maxHeight = defaultTo(process.stdout.rows - 4)(param.height) // minus some padding to fit the next terminal input lines
 
 // Time interval
 const time = [
@@ -40,8 +41,8 @@ const past = moment().subtract(timePast, timeName).format(timeFormat)
 // API Urls
 const baseApiURL = 'https://min-api.cryptocompare.com/data/'
 const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
-    + `&tsym=USD&limit=${timePast}&e=CCCAGG`
-const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=USD,EUR`
+    + `&tsym=${param.market}&limit=${timePast}&e=CCCAGG`
+const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=${param.market}`
 const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
 
 // API call functions
@@ -75,9 +76,10 @@ const main = async () => {
         fetchCoinHistory(ccApiHist),
         fetchCoinCurrentPrice(ccApiCurrent)
     ]
-    const [{CoinName}, history, {USD, EUR}] = await Promise.all(fetchApis)
+    const [{CoinName}, history, value] = await Promise.all(fetchApis)
+    const market = param
     const legend = `\t${CoinName} chart past ${timePast}`
-        + ` ${timeName} since ${past}. Current ${USD}$ / ${EUR}€.`
+        + ` ${timeName} since ${past}. Current value: ${value[param.market]} ${param.market}`
 
     print(asciichart.plot (history, { height: maxHeight }))
     return !param.disableLegend
@@ -88,5 +90,5 @@ main()
 
 // Coin not found
 process.on('unhandledRejection', () =>
-    print(`Sorry. The coin ${param.coin} `
-        + 'you\'re looking for does not exist in the cryptocompare api.'))
+    print(`Sorry. The coin/market pair ${param.coin}/${param.market} `
+        + 'does not exist in the cryptocompare api.'))
