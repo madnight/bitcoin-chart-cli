@@ -18,6 +18,7 @@ param
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
     .option('-c, --coin <string>', 'specify the coin e.g. ETH', 'BTC')
+    .option('-m, --market <string>', 'specify the market e.g. USD, EUR, BTC', 'USD')
     .option('-l, --list', 'list all available coins')
     .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
@@ -40,7 +41,7 @@ const past = moment().subtract(timePast, timeName).format(timeFormat)
 // API Urls
 const baseApiURL = 'https://min-api.cryptocompare.com/data/'
 const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
-    + `&tsym=USD&limit=${timePast}&e=CCCAGG`
+    + `&tsym=${param.market}&limit=${timePast}&e=CCCAGG`
 const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=USD,EUR`
 const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
 
