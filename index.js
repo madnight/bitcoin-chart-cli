@@ -77,7 +77,6 @@ const main = async () => {
         fetchCoinCurrentPrice(ccApiCurrent)
     ]
     const [{CoinName}, history, value] = await Promise.all(fetchApis)
-    const market = param
     const legend = `\t${CoinName} chart past ${timePast}`
         + ` ${timeName} since ${past}. Current value: ${value[param.market]} ${param.market}`
 
