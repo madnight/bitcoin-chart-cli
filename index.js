@@ -17,15 +17,17 @@ param
     .option('--mins <n>', 'number of minutes the chart will go back', parseInt)
     .option('-w, --width <n>', 'max terminal chart width', parseInt)
     .option('-h, --height <n>', 'max terminal chart height', parseInt)
-    .option('-c, --coin <string>', 'specify the coin e.g. ETH', 'BTC')
+    .option('-c, --coin <string>', 'specify the coin e.g. ETH (Default: BTC)', 'BTC')
+    .option('--currency <string>', 'specify the trading pair currency (Default: USD)', 'USD')
     .option('-l, --list', 'list all available coins')
     .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
 
 // Parameter defaults
 const days = defaultTo(90)(param.days)
-const maxWidth = defaultTo(100)(param.width)
-const maxHeight = defaultTo(14)(param.height)
+const maxWidth = defaultTo(process.stdout.columns)(param.width)
+// Minus some padding to fit the next terminal input lines
+const maxHeight = defaultTo(process.stdout.rows - 4)(param.height)
 
 // Time interval
 const time = [
@@ -40,9 +42,12 @@ const past = moment().subtract(timePast, timeName).format(timeFormat)
 // API Urls
 const baseApiURL = 'https://min-api.cryptocompare.com/data/'
 const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
-    + `&tsym=USD&limit=${timePast}&e=CCCAGG`
-const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=USD,EUR`
+    + `&tsym=${param.currency}&limit=${timePast}&e=CCCAGG`
+const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=${param.currency}`
 const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
+
+console.log(ccApiHist);
+console.log(ccApiCurrent);
 
 // API call functions
 const fetchCoinList = async url =>
@@ -75,9 +80,9 @@ const main = async () => {
         fetchCoinHistory(ccApiHist),
         fetchCoinCurrentPrice(ccApiCurrent)
     ]
-    const [{CoinName}, history, {USD, EUR}] = await Promise.all(fetchApis)
+    const [{CoinName}, history, value] = await Promise.all(fetchApis)
     const legend = `\t${CoinName} chart past ${timePast}`
-        + ` ${timeName} since ${past}. Current ${USD}$ / ${EUR}€.`
+        + ` ${timeName} since ${past}. Current value: ${value[param.currency]} ${param.currency}`
 
     print(asciichart.plot (history, { height: maxHeight }))
     return !param.disableLegend
@@ -88,5 +93,5 @@ main()
 
 // Coin not found
 process.on('unhandledRejection', () =>
-    print(`Sorry. The coin ${param.coin} `
-        + 'you\'re looking for does not exist in the cryptocompare api.'))
+    print(`Sorry. The coin/currency pair ${param.coin}/${param.currency} `
+        + 'does not exist in the cryptocompare api.'))
