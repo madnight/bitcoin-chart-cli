@@ -42,8 +42,11 @@ const past = moment().subtract(timePast, timeName).format(timeFormat)
 const baseApiURL = 'https://min-api.cryptocompare.com/data/'
 const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
     + `&tsym=${param.market}&limit=${timePast}&e=CCCAGG`
-const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=USD,EUR`
+const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=${param.market}`
 const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
+
+console.log(ccApiHist);
+console.log(ccApiCurrent);
 
 // API call functions
 const fetchCoinList = async url =>
@@ -76,9 +79,10 @@ const main = async () => {
         fetchCoinHistory(ccApiHist),
         fetchCoinCurrentPrice(ccApiCurrent)
     ]
-    const [{CoinName}, history, {USD, EUR}] = await Promise.all(fetchApis)
+    const [{CoinName}, history, value] = await Promise.all(fetchApis)
+    const market = param
     const legend = `\t${CoinName} chart past ${timePast}`
-        + ` ${timeName} since ${past}. Current ${USD}$ / ${EUR}€.`
+        + ` ${timeName} since ${past}. Current value: ${value[param.market]} ${param.market}`
 
     print(asciichart.plot (history, { height: maxHeight }))
     return !param.disableLegend
