@@ -42,16 +42,16 @@ bitcoin-chart-cli --help
 
   Options:
 
-    -V, --version         output the version number
-    -d, --days <n>        number of days the chart will go back
-    --hours <n>           number of hours the chart will go back
-    --mins <n>            number of minutes the chart will go back
-    -w, --width <n>       max terminal chart width
-    -h, --height <n>      max terminal chart height
-    -c, --coin <string>   specify the coin e.g. ETH
-    -m, --market <string> specify the market e.g. USD, EUR, BTC
-    --disable-legend      disable legend text
-    -h, --help            output usage information
+    -V, --version           output the version number
+    -d, --days <n>          number of days the chart will go back
+    --hours <n>             number of hours the chart will go back
+    --mins <n>              number of minutes the chart will go back
+    -w, --width <n>         max terminal chart width
+    -h, --height <n>        max terminal chart height
+    -c, --coin <string>     specify the coin e.g. ETH
+    -m, --currency <string> specify the trading pair currency (Default: USD)
+    --disable-legend        disable legend text
+    -h, --help              output usage information
 ```
 # Examples
 
