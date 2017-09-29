@@ -45,9 +45,6 @@ const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
 const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=${param.market}`
 const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
 
-console.log(ccApiHist);
-console.log(ccApiCurrent);
-
 // API call functions
 const fetchCoinList = async url =>
     flow(
