@@ -90,5 +90,5 @@ main()
 
 // Coin not found
 process.on('unhandledRejection', () =>
-    print(`Sorry. The coin ${param.coin} `
-        + 'you\'re looking for does not exist in the cryptocompare api.'))
+    print(`Sorry. The coin/market pair ${param.coin}/${param.market} `
+        + 'does not exist in the cryptocompare api.'))
