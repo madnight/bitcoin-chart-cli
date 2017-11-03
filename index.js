@@ -25,9 +25,8 @@ param
 
 // Parameter defaults
 const days = defaultTo(90)(param.days)
-const maxWidth = defaultTo(process.stdout.columns)(param.width)
-// Minus some padding to fit the next terminal input lines
-const maxHeight = defaultTo(process.stdout.rows - 4)(param.height)
+const maxWidth = defaultTo(100)(param.width)
+const maxHeight = defaultTo(14)(param.height)
 
 // Time interval
 const time = [
