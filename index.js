@@ -2,7 +2,7 @@
 
 const {get, defaultTo, map, flow, sortBy,
     remove, chunk, ceil, mean, toLower, trim,
-    negate, first} = require('lodash/fp')
+    negate, first, pad} = require('lodash/fp')
 const axios = require('axios')
 const moment = require('moment')
 const asciichart = require ('asciichart')
@@ -78,9 +78,11 @@ const main = async () => {
     ]
     const [{CoinName}, history, value] = await Promise.all(fetchApis)
     const legend = `\t${CoinName} chart past ${timePast}`
-        + ` ${timeName} since ${past}. Current value: ${value[param.currency]} ${param.currency}`
+        + ` ${timeName} since ${past}.`
+        + `Current value: ${value[param.currency]} ${param.currency}`
 
-    print(asciichart.plot (history, { height: maxHeight }))
+    print(asciichart.plot(history, { height: maxHeight, padding: pad(10)("") }))
+
     return !param.disableLegend
         && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
 }
