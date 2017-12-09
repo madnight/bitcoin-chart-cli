@@ -81,8 +81,21 @@ const main = async () => {
         + ` ${timeName} since ${past}.`
         + `Current value: ${value[param.currency]} ${param.currency}`
 
-    const padding = pad(1 + max(history).toString().length)('')
-    print(asciichart.plot(history, { height: maxHeight, padding: padding }))
+    const fixed = ((maxHist) => {
+        if (maxHist < 0.0001) return 8
+        if (maxHist < 0.01) return 6
+        if (maxHist < 0.1) return 3
+        if (maxHist < 100) return 2
+        return 0
+    })(max(history))
+    const fixedHist = map(x => x.toFixed(fixed))(history)
+    const padding = pad(2 + max(fixedHist).toString().length)('')
+
+    print(asciichart.plot(fixedHist, {
+        height: maxHeight,
+        padding: padding,
+        format: x => (padding + x.toFixed(fixed)).slice(-padding.length)
+    }))
 
     return !param.disableLegend
         && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
