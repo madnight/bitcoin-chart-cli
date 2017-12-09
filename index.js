@@ -8,10 +8,11 @@ const moment = require('moment')
 const asciichart = require ('asciichart')
 const param = require('commander')
 const wrap = require('word-wrap')
+const {version} = require('./package.json')
 const print = string => process.stdout.write(string + '\n')
 
 param
-    .version('3.0.0')
+    .version(version)
     .option('-d, --days <n>', 'number of days the chart will go back', parseInt)
     .option('--hours <n>', 'number of hours the chart will go back', parseInt)
     .option('--mins <n>', 'number of minutes the chart will go back', parseInt)
