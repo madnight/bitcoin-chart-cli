@@ -80,7 +80,7 @@ const main = async () => {
     const [{CoinName}, history, value] = await Promise.all(fetchApis)
     const legend = `\t${CoinName} chart past ${timePast}`
         + ` ${timeName} since ${past}.`
-        + `Current value: ${value[param.currency]} ${param.currency}`
+        + ` Current value: ${value[param.currency]} ${param.currency}`
 
     const fixed = ((maxHist) => {
         if (maxHist < 0.0001) return 8
