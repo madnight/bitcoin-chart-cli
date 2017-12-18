@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
-const {get, defaultTo, map, flow, sortBy,
-    remove, chunk, ceil, mean, toLower, trim,
-    negate, first, pad, max} = require('lodash/fp')
-const axios = require('axios')
-const moment = require('moment')
-const asciichart = require ('asciichart')
-const param = require('commander')
-const wrap = require('word-wrap')
-const {version} = require('./package.json')
+const { get, defaultTo, map, flow, sortBy, remove, always,
+    chunk, ceil, mean, toLower, trim, negate, first, pad,
+    max, gt, cond, T } = require('lodash/fp')
+const axios            = require('axios')
+const moment           = require('moment')
+const asciichart       = require ('asciichart')
+const param            = require('commander')
+const wrap             = require('word-wrap')
+const {version}        = require('./package.json')
+
 const print = string => process.stdout.write(string + '\n')
+const id = always
 
 param
     .version(version)
@@ -66,29 +68,27 @@ const fetchCoinHistory = async url =>
         map(mean)
     )(await axios.get(url))
 
-const main = async () => {
-    if (param.list) // eslint-disable-line
-        return map(flow(trim, print))(
-            sortBy(flow(trim, toLower))(
-                await fetchCoinList(ccApiAll)))
+const fetchApis = [
+    fetchCoinInfo(ccApiAll),
+    fetchCoinHistory(ccApiHist),
+    fetchCoinCurrentPrice(ccApiCurrent)
+]
 
-    const fetchApis = [
-        fetchCoinInfo(ccApiAll),
-        fetchCoinHistory(ccApiHist),
-        fetchCoinCurrentPrice(ccApiCurrent)
-    ]
+const normalize = cond([
+    [gt(0.0001), id(8)],
+    [gt(0.01),   id(6)],
+    [gt(0.1),    id(3)],
+    [gt(100),    id(2)],
+    [T,          id(0)]
+])
+
+const main = async () => {
     const [{CoinName}, history, value] = await Promise.all(fetchApis)
     const legend = `\t${CoinName} chart past ${timePast}`
         + ` ${timeName} since ${past}.`
         + ` Current value: ${value[param.currency]} ${param.currency}`
 
-    const fixed = ((maxHist) => {
-        if (maxHist < 0.0001) return 8
-        if (maxHist < 0.01) return 6
-        if (maxHist < 0.1) return 3
-        if (maxHist < 100) return 2
-        return 0
-    })(max(history))
+    const fixed = normalize(max(history))
     const fixedHist = map(x => x.toFixed(fixed))(history)
     const padding = pad(2 + max(fixedHist).toString().length)('')
 
@@ -102,7 +102,15 @@ const main = async () => {
         && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
 }
 
-main()
+const printCoins = async () => {
+    return flow(
+        map(trim),
+        sortBy(toLower),
+        map(print)
+    )(await fetchCoinList(ccApiAll))
+}
+
+param.list && printCoins() || main()
 
 // Coin not found
 process.on('unhandledRejection', () =>
