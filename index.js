@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 const { get, defaultTo, map, flow, sortBy, remove, always,
-    chunk, ceil, mean, toLower, trim, negate, first, pad,
-    max, gt, cond, T } = require('lodash/fp')
-const axios            = require('axios')
-const moment           = require('moment')
-const asciichart       = require ('asciichart')
-const param            = require('commander')
-const wrap             = require('word-wrap')
-const {version}        = require('./package.json')
+    toLower, trim, negate, first, pad, max, gt, cond, T }
+                            = require('lodash/fp')
+const axios                 = require('axios')
+const moment                = require('moment')
+const asciichart            = require ('asciichart')
+const param                 = require('commander')
+const { version }           = require('./package.json')
+const { interpolateArray }  = require('array-interpolatejs')
 
 const print = string => process.stdout.write(string + '\n')
 const id = always
@@ -33,9 +33,9 @@ const maxHeight = defaultTo(14)(param.height)
 
 // Time interval
 const time = [
-    [param.mins, 'minutes', 'histominute'],
-    [param.hours, 'hours', 'histohour'],
-    [days, 'days', 'histoday']
+    [param.mins  ,'minutes' ,'histominute'],
+    [param.hours ,'hours'   ,'histohour'],
+    [days        ,'days'    ,'histoday']
 ]
 const [timePast, timeName, timeApi] = flow(remove(negate(first)), first)(time)
 const timeFormat = 'YYYY-MM-DD hh:mm a'
@@ -55,21 +55,16 @@ const fetchCoinList = async url =>
         map('FullName')
     )(await axios.get(url))
 
-const fetchCoinInfo = async url =>
-    get(`data.Data.${param.coin}`)(await axios.get(url))
-
 const fetchCoinCurrentPrice = async url => (await axios.get(url)).data
 
 const fetchCoinHistory = async url =>
     flow(
         get('data.Data'),
         map('close'),
-        chunk(ceil(days/maxWidth)),
-        map(mean)
+        interpolateArray(maxWidth)
     )(await axios.get(url))
 
 const fetchApis = [
-    fetchCoinInfo(ccApiAll),
     fetchCoinHistory(ccApiHist),
     fetchCoinCurrentPrice(ccApiCurrent)
 ]
@@ -83,10 +78,14 @@ const normalize = cond([
 ])
 
 const main = async () => {
-    const [{CoinName}, history, value] = await Promise.all(fetchApis)
-    const legend = `\t${CoinName} chart past ${timePast}`
+
+    const [history, value] = await Promise.all(fetchApis)
+    const legend = `\t ${param.coin} last ${timePast}`
         + ` ${timeName} since ${past}.`
-        + ` Current value: ${value[param.currency]} ${param.currency}`
+        + ` Now: ${value[param.currency]} ${param.currency}`
+
+    const smallLegend = `\t ${param.coin} last ${timePast}`
+        + ` ${timeName}. Now: ${value[param.currency]} ${param.currency}`
 
     const fixed = normalize(max(history))
     const fixedHist = map(x => x.toFixed(fixed))(history)
@@ -98,8 +97,8 @@ const main = async () => {
         format: x => (padding + x.toFixed(fixed)).slice(-padding.length)
     }))
 
-    return !param.disableLegend
-        && print(wrap(legend, {width: maxWidth, newline: '\n\t\t'}))
+    return maxWidth < 40 ? false :
+        !param.disableLegend && print(maxWidth < 65 ? smallLegend : legend)
 }
 
 const printCoins = async () => {
