@@ -15,8 +15,8 @@ rules:
     - off # nodejs does not have this
   fp/no-unused-expression:
     - off # false positives
-  better/no-ifs:
-    - off
+  fp/no-class:
+    - off # es6 classes are kewl
   fp/no-mutation:
     - error
     - commonjs: true # allow export statement
