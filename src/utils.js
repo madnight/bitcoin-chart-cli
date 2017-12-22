@@ -10,5 +10,4 @@ const normalize = cond([
     [T,          id(0)]
 ])
 
-module.exports = { print: print, id: id, normalize: normalize }
-
+module.exports = { print: print, normalize: normalize }
