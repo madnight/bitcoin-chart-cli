@@ -63,11 +63,12 @@ bitcoin-chart-cli --help
 bitcoin-chart-cli
 ```
 
-![](https://i.imgur.com/gg5kRYG.png)
-
-```bash
-bitcoin-chart-cli --coin LTC
+![](https://i.imgur.com/ijwaYXir.png)
 ```
+Create terminal splits (tmux) with watch for live charts the unix way
+watch -n 60 bitcoin-chart-cli --mins 30 --width 60
+```
+
 
 ![](https://i.imgur.com/cTtFxy6.png)
 
