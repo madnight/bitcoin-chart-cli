@@ -1,17 +1,15 @@
 #!/usr/bin/env node
 
-const { get, defaultTo, map, flow, sortBy, remove, always,
-    toLower, trim, negate, first, pad, max, gt, cond, T }
+const {defaultTo, map, flow, sortBy,
+    remove, toLower, trim, negate, first, pad, max }
                             = require('lodash/fp')
-const axios                 = require('axios')
 const moment                = require('moment')
 const asciichart            = require ('asciichart')
 const param                 = require('commander')
 const { version }           = require('./package.json')
 const { interpolateArray }  = require('array-interpolatejs')
-
-const print = string => process.stdout.write(string + '\n')
-const id = always
+const { CryptoCompareAPI }  = require('./src/CryptoCompareAPI.js')
+const { print, normalize }  = require('./src/utils.js')
 
 param
     .version(version)
@@ -41,45 +39,14 @@ const [timePast, timeName, timeApi] = flow(remove(negate(first)), first)(time)
 const timeFormat = 'YYYY-MM-DD hh:mm a'
 const past = moment().subtract(timePast, timeName).format(timeFormat)
 
-// API Urls
-const baseApiURL = 'https://min-api.cryptocompare.com/data/'
-const ccApiHist = `${baseApiURL}${timeApi}?fsym=${param.coin}`
-    + `&tsym=${param.currency}&limit=${timePast}&e=CCCAGG`
-const ccApiCurrent = `${baseApiURL}price?fsym=${param.coin}&tsyms=${param.currency}`
-const ccApiAll = 'https://www.cryptocompare.com/api/data/coinlist'
-
-// API call functions
-const fetchCoinList = async url =>
-    flow(
-        get('data.Data'),
-        map('FullName')
-    )(await axios.get(url))
-
-const fetchCoinCurrentPrice = async url => (await axios.get(url)).data
-
-const fetchCoinHistory = async url =>
-    flow(
-        get('data.Data'),
-        map('close'),
-        interpolateArray(maxWidth)
-    )(await axios.get(url))
-
-const fetchApis = [
-    fetchCoinHistory(ccApiHist),
-    fetchCoinCurrentPrice(ccApiCurrent)
-]
-
-const normalize = cond([
-    [gt(0.0001), id(8)],
-    [gt(0.01),   id(6)],
-    [gt(0.1),    id(3)],
-    [gt(100),    id(2)],
-    [T,          id(0)]
-])
-
 const main = async () => {
 
-    const [history, value] = await Promise.all(fetchApis)
+    const history = interpolateArray(maxWidth)(await CryptoCompareAPI.
+        fetchCoinHistory(timeApi, param.coin, param.currency, timePast))
+
+    const value = await CryptoCompareAPI.
+        fetchCoinPrice(param.coin, param.currency)
+
     const legend = `\t ${param.coin} last ${timePast}`
         + ` ${timeName} since ${past}.`
         + ` Now: ${value[param.currency]} ${param.currency}`
@@ -106,7 +73,7 @@ const printCoins = async () => {
         map(trim),
         sortBy(toLower),
         map(print)
-    )(await fetchCoinList(ccApiAll))
+    )(await CryptoCompareAPI.fetchCoinList())
 }
 
 param.list && printCoins() || main()
