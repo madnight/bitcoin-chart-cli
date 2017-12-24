@@ -1,21 +1,21 @@
 const { get, map, flow } = require('lodash/fp')
 const axios              = require('axios')
+const queryString        = require('query-string')
 
 class CryptoCompareAPI {
 
-    // API Urls
     static baseURL() {
         return 'https://min-api.cryptocompare.com/data/'
     }
 
     static History(time, coin, currency, past) {
-        return `${CryptoCompareAPI.baseURL()}${time}?fsym=${coin}`
-            + `&tsym=${currency}&limit=${past}&e=CCCAGG`
+        return this.baseURL() + time + '?' +
+            queryString.stringify({ fsym: coin, tsym: currency, limit: past })
     }
 
     static Current(coin, currency) {
-        return `${CryptoCompareAPI.baseURL()}`
-            + `price?fsym=${coin}&tsyms=${currency}`
+        return this.baseURL() + 'price?' +
+            queryString.stringify({ fsym: coin, tsyms: currency })
     }
 
     static CoinList() {

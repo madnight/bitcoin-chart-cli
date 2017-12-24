@@ -17,6 +17,8 @@ rules:
     - off # false positives
   fp/no-class:
     - off # es6 classes are kewl
+  fp/no-this:
+    - off
   fp/no-mutation:
     - error
     - commonjs: true # allow export statement
