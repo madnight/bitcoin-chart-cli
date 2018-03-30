@@ -12,6 +12,7 @@ param
     .option('-c, --coin <string>', 'specify the coin e.g. ETH (Default: BTC)', 'BTC')
     .option('--currency <string>', 'specify the trading pair currency (Default: USD)', 'USD')
     .option('-l, --list', 'list all available coins')
+    .option('--live', 'experimental bitfinex live price feature')
     .option('--disable-legend', 'disable legend text')
     .parse(process.argv)
 
@@ -19,6 +20,7 @@ module.exports = {
     days: defaultTo(90)(param.days),
     mins: param.mins,
     hours: param.hours,
+    live: param.live,
     coin: param.coin,
     currency: param.currency,
     maxWidth: defaultTo(100)(param.width),

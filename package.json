@@ -30,14 +30,16 @@
     "array-interpolatejs": "^1.0.2",
     "asciichart": "^1.5.1",
     "axios": "^0.17.1",
+    "bitfinex-api-node": "^2.0.0-beta",
+    "clear": "^0.1.0",
     "commander": "^2.10.0",
     "lodash": "^4.17.4",
     "moment": "^2.19.3"
   },
   "devDependencies": {
-    "eslint-config-cleanjs": "^4.0.0",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.1.1",
+    "eslint-config-cleanjs": "^4.0.0",
     "eslint-plugin-better": "^0.1.5",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-import": "^2.7.0"

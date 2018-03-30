@@ -2,13 +2,14 @@
 
 const { map, flow, sortBy, remove, toLower,
     trim, negate, first, pad, max } = require('lodash/fp')
-const { days, mins, hours, maxWidth, maxHeight, coin, currency,
+const { days, mins, hours, maxWidth, maxHeight, coin, currency, live,
     showCoinList, disableLegend }   = require('./src/arguments.js')
 const moment                        = require('moment')
 const asciichart                    = require ('asciichart')
 const { interpolateArray }          = require('array-interpolatejs')
 const { CryptoCompareAPI }          = require('./src/CryptoCompareAPI.js')
 const { print, normalize }          = require('./src/utils.js')
+const { livePrice }                 = require('./src/live.js')
 
 const time = () =>
     flow(remove(negate(first)), first)([
@@ -22,6 +23,7 @@ const printCoins = async () =>
         await CryptoCompareAPI.fetchCoinList())
 
 const main = async () => {
+
     const [timePast, timeName, timeApi] = time()
     const past = moment()
         .subtract(timePast, timeName)
@@ -50,7 +52,7 @@ const main = async () => {
         !disableLegend && print(maxWidth < 65 ? smallLegend : legend)
 }
 
-showCoinList && printCoins() || main()
+showCoinList && printCoins() || live ? livePrice(maxWidth, maxHeight) : main()
 
 // Coin not found
 process.on('unhandledRejection', () =>

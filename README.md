@@ -77,3 +77,10 @@ In combination with conky
 conky.text = [[ ${execi 120 bitcoin-chart-cli --coin ETH -w 140 -h 15} ]];
 ```
 More examples https://travis-ci.org/madnight/bitcoin-chart-cli
+
+## Experimental Bitcoin Live Price Feature
+
+```bash
+bitcoin-chart-cli --live
+```
+Prints a chart based on bitfinex live price values. The price is updated on every bitfinex trade, up to multiple times per second. This is as live as it can be. Most platforms provide 1 min candles as minimum timeframe. This feature allows you to see intra minute price changes with seconds and milliseconds. Please note that this feature does not work together with conky, since it requires a permanent connection and does not exit (like ncurses applications).
