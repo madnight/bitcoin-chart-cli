@@ -33,7 +33,7 @@
     "bitfinex-api-node": "^2.0.0-beta",
     "clear": "^0.1.0",
     "commander": "^2.10.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "moment": "^2.19.3"
   },
   "devDependencies": {
