@@ -8,7 +8,7 @@
 <a href="https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues"><img src="https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000" alt="Issue Count" /></a>
 <a href="https://snyk.io/test/github/madnight/bitcoin-chart-cli"><img src="https://snyk.io/test/github/madnight/bitcoin-chart-cli/badge.svg" alt="Known Vulnerabilities" /></a>
 <a href="https://david-dm.org/madnight/bitcoin-chart-cli"><img src="https://david-dm.org/madnight/bitcoin-chart-cli/status.svg" alt="dependencies Status" /></a>
-<a href="https://www.bithound.io/github/madnight/bitcoin-chart-cli"><img src="https://www.bithound.io/github/madnight/bitcoin-chart-cli/badges/score.svg" alt="bitHound Overall Score" /></a></p>
+
                                      
 Bitcoin chart for the terminal as command line util
 
