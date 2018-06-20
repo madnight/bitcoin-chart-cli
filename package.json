@@ -29,7 +29,7 @@
   "dependencies": {
     "array-interpolatejs": "^1.0.2",
     "asciichart": "^1.5.1",
-    "axios": "^0.17.1",
+    "axios": "^0.18.0",
     "bitfinex-api-node": "^2.0.0-beta",
     "clear": "^0.1.0",
     "commander": "^2.10.0",
