@@ -1,21 +1,23 @@
-# bitcoin-chart-cli
+<p align="center">
+    <h1 align="center">bitcoin-chart-cli<br></h1>
+</p>
 
-<p align=center><img src="bitcoin-chart-cli.png" width="150">
 <p align=center>
-<a href="https://npmjs.com/package/bitcoin-chart-cli"><img src="https://img.shields.io/npm/v/bitcoin-chart-cli.svg" alt="npm" /></a>
+<a href="https://npmjs.com/package/bitcoin-chart-cli"><img src="https://img.shields.io/npm/v/bitcoin-chart-cli.svg" alt="npm"/></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License: MIT" /></a>
 <a href="https://travis-ci.org/madnight/bitcoin-chart-cli"><img src="https://travis-ci.org/madnight/bitcoin-chart-cli.svg?branch=master" alt="Build Status" /></a>
 <a href="https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues"><img src="https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000" alt="Issue Count" /></a>
 <a href="https://snyk.io/test/github/madnight/bitcoin-chart-cli"><img src="https://snyk.io/test/github/madnight/bitcoin-chart-cli/badge.svg" alt="Known Vulnerabilities" /></a>
 <a href="https://david-dm.org/madnight/bitcoin-chart-cli"><img src="https://david-dm.org/madnight/bitcoin-chart-cli/status.svg" alt="dependencies Status" /></a>
+ <br> <br>
 
-                                     
-Bitcoin chart for the terminal as command line util
+<img align="right" src="bitcoin-chart-cli.png" width="200">
 
-For a list of supported cryptocurrencies see [coins](COINS.md)
+Bitcoin chart for the terminal as command line util.<br>
+For a list of supported cryptocurrencies see <a href="COINS.md">coins</a>.
 
 ### Requirements
- * node 8.0 or higher (need fancy syntax features thats why 8+)
+ * node 8.0 or higher
  * npm or yarn
 
 ### Usage
