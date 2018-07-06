@@ -4,6 +4,7 @@
 
 <p align=center>
 <a href="https://npmjs.com/package/bitcoin-chart-cli"><img src="https://img.shields.io/npm/v/bitcoin-chart-cli.svg" alt="npm"/></a>
+<a href="https://nodejs.org/en/download/releases/"><img src="https://img.shields.io/badge/node-%3E%3D%208.0-brightgreen.svg" alt="License: MIT" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License: MIT" /></a>
 <a href="https://travis-ci.org/madnight/bitcoin-chart-cli"><img src="https://travis-ci.org/madnight/bitcoin-chart-cli.svg?branch=master" alt="Build Status" /></a>
 <a href="https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues"><img src="https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000" alt="Issue Count" /></a>
