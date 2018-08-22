@@ -19,7 +19,7 @@ class CryptoCompareAPI {
     }
 
     static CoinList() {
-        return 'https://www.cryptocompare.com/api/data/coinlist'
+        return `${CryptoCompareAPI.baseURL()}` + 'all/coinlist'
     }
 
     static async fetchCoinList() {
