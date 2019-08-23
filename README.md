@@ -2,8 +2,6 @@
     <h1 align="center">bitcoin-chart-cli<br></h1>
 </p>
 
-<p align=center><img src="bitcoin-chart-cli.png" width="150">
-<p align=center>
 <a href="https://npmjs.com/package/bitcoin-chart-cli"><img src="https://img.shields.io/npm/v/bitcoin-chart-cli.svg" alt="npm"/></a>
 <a href="https://nodejs.org/en/download/releases/"><img src="https://img.shields.io/badge/node-%3E%3D%208.0-brightgreen.svg" alt="License: MIT" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License: MIT" /></a>
@@ -30,6 +28,9 @@ npm install bitcoin-chart-cli -g
 
 # (alternative) install with yarn
 yarn global add bitcoin-chart-cli
+
+# (alternative) run without install
+npx bitcoin-chart-cli
 
 # run default
 bitcoin-chart-cli
