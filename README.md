@@ -14,7 +14,10 @@
 <img align="right" src="bitcoin-chart-cli.png" width="200">
 
 Bitcoin chart for the terminal as command line util.<br>
-For a list of supported cryptocurrencies see <a href="COINS.md">coins</a>.
+For a list of supported cryptocurrencies see <a href="COINS.md">coins</a>.<br>
+You might also be interested in a similar project of <br>
+mine [wallstreet](https://github.com/madnight/wallstreet), which provides information about <br>
+stocks instead of cryptocurrencies.
 
 ### Requirements
  * node 8.0 or higher
