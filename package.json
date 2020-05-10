@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-chart-cli",
-  "version": "3.3.1",
+  "version": "3.3.3",
   "license": "MIT",
   "author": "Fabian Beuke <mail@beuke.org>",
   "description": "Bitcoin chart for the terminal as command line util",
@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/madnight/bitcoin-chart-cli#readme",
   "dependencies": {
-    "array-interpolatejs": "^1.0.2",
-    "asciichart": "^1.5.1",
-    "axios": "^0.19.0",
-    "clear": "^0.1.0",
-    "commander": "^5.0.0",
-    "lodash": "^4.17.15",
-    "moment": "^2.19.3"
+    "array-interpolatejs": "1.0.2",
+    "asciichart": "1.5.1",
+    "axios": "0.19.0",
+    "clear": "0.1.0",
+    "commander": "5.0.0",
+    "lodash": "4.17.15",
+    "moment": "2.19.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
