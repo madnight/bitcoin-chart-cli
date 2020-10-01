@@ -8,18 +8,26 @@ class CryptoCompareAPI {
         return 'https://min-api.cryptocompare.com/data/'
     }
 
+    static apiKey() {
+        return process.env.CRYPTOCOMPARE_API_KEY ?
+            `&api_key=${process.env.CRYPTOCOMPARE_API_KEY}` : ''
+    }
+
     static History(time, coin, currency, past) {
         return `${CryptoCompareAPI.baseURL()}${time}?fsym=${coin}`
             + `&tsym=${currency}&limit=${past}&e=CCCAGG`
+            + CryptoCompareAPI.apiKey()
     }
 
     static Current(coin, currency) {
         return `${CryptoCompareAPI.baseURL()}`
             + `price?fsym=${coin}&tsyms=${currency}`
+            + CryptoCompareAPI.apiKey()
     }
 
     static CoinList() {
         return `${CryptoCompareAPI.baseURL()}` + 'all/coinlist'
+            + CryptoCompareAPI.apiKey()
     }
 
     static async fetchCoinList() {
