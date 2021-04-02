@@ -32,7 +32,7 @@
     "axios": "0.21.1",
     "clear": "0.1.0",
     "commander": "5.0.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "moment": "2.19.3"
   },
   "devDependencies": {
