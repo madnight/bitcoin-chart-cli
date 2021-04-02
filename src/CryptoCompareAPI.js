@@ -52,7 +52,7 @@ class CryptoCompareAPI {
             console.log(data.Message);
             process.exit(1);
         }
-        return data.Data.map(d => d.close)
+        return data.Data.map((d) => d.close);
     }
 
     static async fetchCoinPrice(coin, currency) {
