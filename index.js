@@ -52,13 +52,19 @@ const main = async () => {
     const fixedHist = map((x) => x.toFixed(fixed))(history);
     const padding = pad(2 + max(fixedHist).toString().length)("");
 
-    print(
-        asciichart.plot(fixedHist, {
-            height: args.maxHeight,
-            padding: padding,
-            format: (x) => (padding + x.toFixed(fixed)).slice(-padding.length),
-        })
-    );
+    try {
+        print(
+            asciichart.plot(fixedHist, {
+                height: args.maxHeight,
+                padding: padding,
+                format: (x) =>
+                    (padding + x.toFixed(fixed)).slice(-padding.length),
+            })
+        );
+    } catch (e) {
+        console.log("Couldn't plot chart. Please try different width or height settings.")
+        process.exit(1);
+    }
 
     return args.maxWidth < 40
         ? false

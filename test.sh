@@ -14,7 +14,6 @@ node index.js -d 2000
 node index.js --coin DASH -d 800
 node index.js -w 200 -h 80
 node index.js -w 80 -h 5
-node index.js --coin GNT --mins 60 -w 80 -h 5
 node index.js --coin ETH --currency BTC -d 30
 node index.js --coin ETH --currency USD
 node index.js --coin ADA --currency USD
