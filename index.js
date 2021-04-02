@@ -51,8 +51,3 @@ const main = async () => {
 }
 
 showCoinList && printCoins() || main()
-
-// Coin not found
-process.on('unhandledRejection', () =>
-    print(`Sorry. The coin/currency pair ${args.coin}/${currency} `
-        + 'does not exist in the cryptocompare api.'))

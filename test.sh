@@ -18,5 +18,4 @@ node index.js --coin GNT --mins 60 -w 80 -h 5
 node index.js --coin ETH --currency BTC -d 30
 node index.js --coin ETH --currency USD
 node index.js --coin ADA --currency USD
-node index.js --coin ADA --currency IOT
 node index.js --coin ADA --currency BTC
