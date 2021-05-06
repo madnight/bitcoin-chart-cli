@@ -49,13 +49,15 @@ const main = async () => {
     const smallLegend = baseLegend + now;
 
     const fixed = normalize(max(history));
-    const fixedHist = map((x) => x.toFixed(fixed))(history);
+    const fixedHist = map((x) => x.toFixed(fixed))(history).map(Number);
     const padding = pad(2 + max(fixedHist).toString().length)("");
 
     try {
         print(
             asciichart.plot(fixedHist, {
                 height: args.maxHeight,
+                max: args.max,
+                min: args.min,
                 padding: padding,
                 format: (x) =>
                     (padding + x.toFixed(fixed)).slice(-padding.length),

@@ -28,7 +28,7 @@
   "homepage": "https://github.com/madnight/bitcoin-chart-cli#readme",
   "dependencies": {
     "array-interpolatejs": "1.0.2",
-    "asciichart": "1.5.1",
+    "asciichart": "1.5.25",
     "axios": "0.21.1",
     "clear": "0.1.0",
     "commander": "5.0.0",

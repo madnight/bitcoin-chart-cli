@@ -121,10 +121,10 @@ array.prototype.flat@^1.2.1:
     define-properties "^1.1.3"
     es-abstract "^1.17.0-next.1"
 
-asciichart@1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/asciichart/-/asciichart-1.5.1.tgz#0dc0f462949ded30ad10956b7fabcff915e86c58"
-  integrity sha1-DcD0YpSd7TCtEJVrf6vP+RXobFg=
+asciichart@1.5.25:
+  version "1.5.25"
+  resolved "https://registry.yarnpkg.com/asciichart/-/asciichart-1.5.25.tgz#f5aca189801b4e58019139bbb5922ab3cae3ca90"
+  integrity sha512-PNxzXIPPOtWq8T7bgzBtk9cI2lgS4SJZthUHEiQ1aoIc3lNzGfUvIvo9LiAnq26TACo9t1/4qP6KTGAUbzX9Xg==
 
 astral-regex@^1.0.0:
   version "1.0.0"

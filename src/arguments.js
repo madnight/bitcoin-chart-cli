@@ -9,6 +9,8 @@ param
     .option("--mins <n>", "number of minutes the chart will go back", parseInt)
     .option("-w, --width <n>", "max terminal chart width", parseInt)
     .option("-h, --height <n>", "max terminal chart height", parseInt)
+    .option("--max <n>", "max y-axis value", parseInt)
+    .option("--min <n>", "min y-axis value", parseInt)
     .option(
         "-c, --coin <string>",
         "specify the coin e.g. ETH (Default: BTC)",
@@ -28,6 +30,8 @@ module.exports = {
     mins: param.mins,
     hours: param.hours,
     coin: param.coin,
+    max: param.max,
+    min: param.min,
     currency: param.currency,
     maxWidth: defaultTo(100)(param.width),
     maxHeight: defaultTo(14)(param.height),
