@@ -58,6 +58,8 @@ bitcoin-chart-cli --help
     --mins <n>              number of minutes the chart will go back
     -w, --width <n>         max terminal chart width
     -h, --height <n>        max terminal chart height
+    --max <n>               max y-axis value
+    --min <n>               min y-axis value
     -c, --coin <string>     specify the coin e.g. ETH
     -m, --currency <string> specify the trading pair currency (Default: USD)
     --disable-legend        disable legend text
