@@ -11,6 +11,7 @@ param
     .option("-h, --height <n>", "max terminal chart height", parseInt)
     .option("--max <n>", "max y-axis value", parseInt)
     .option("--min <n>", "min y-axis value", parseInt)
+    .option("--min-range <n>", "min range between min and max y-axis value", parseInt)
     .option(
         "-c, --coin <string>",
         "specify the coin e.g. ETH (Default: BTC)",
@@ -32,6 +33,7 @@ module.exports = {
     coin: param.coin,
     max: param.max,
     min: param.min,
+    minRange: param.minRange,
     currency: param.currency,
     maxWidth: defaultTo(100)(param.width),
     maxHeight: defaultTo(14)(param.height),

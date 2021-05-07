@@ -4,7 +4,7 @@ const args = require("./src/arguments.js");
 const asciichart = require("asciichart");
 const moment = require("moment");
 const { map, flow, sortBy, remove, toLower } = require("lodash/fp");
-const { trim, negate, first, pad, max } = require("lodash/fp");
+const { trim, negate, first, pad, max, min } = require("lodash/fp");
 const { currency, showCoinList } = require("./src/arguments.js");
 const { interpolateArray } = require("array-interpolatejs");
 const { CryptoCompareAPI } = require("./src/CryptoCompareAPI.js");
@@ -26,6 +26,15 @@ const printCoins = async () =>
         sortBy(toLower),
         map(print)
     )(await CryptoCompareAPI.fetchCoinList());
+
+const getMinRange = (max, min) => {
+    if (max - min > args.minRange) return [];
+    const dist = max - min;
+    return [
+        max + (args.minRange / 2 - dist / 2),
+        min - (args.minRange / 2 - dist / 2),
+    ];
+};
 
 const main = async () => {
     const [timePast, timeName, timeApi] = time();
@@ -51,20 +60,23 @@ const main = async () => {
     const fixed = normalize(max(history));
     const fixedHist = map((x) => x.toFixed(fixed))(history).map(Number);
     const padding = pad(2 + max(fixedHist).toString().length)("");
+    const [maxH, minH] = getMinRange(max(fixedHist), min(fixedHist));
 
     try {
         print(
             asciichart.plot(fixedHist, {
                 height: args.maxHeight,
-                max: args.max,
-                min: args.min,
+                max: args.minRange ? maxH : args.max,
+                min: args.minRange ? minH : args.min,
                 padding: padding,
                 format: (x) =>
                     (padding + x.toFixed(fixed)).slice(-padding.length),
             })
         );
     } catch (e) {
-        console.log("Couldn't plot chart. Please try different width or height settings.")
+        console.log(
+            "Couldn't plot chart. Please try different width or height settings."
+        );
         process.exit(1);
     }
 
