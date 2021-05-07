@@ -30,6 +30,7 @@
     "array-interpolatejs": "1.0.2",
     "asciichart": "1.5.25",
     "axios": "0.21.1",
+    "chalk": "^4.1.1",
     "clear": "0.1.0",
     "commander": "5.0.0",
     "lodash": "4.17.21",

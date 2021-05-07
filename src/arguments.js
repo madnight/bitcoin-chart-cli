@@ -23,6 +23,7 @@ param
         "USD"
     )
     .option("-l, --list", "list all available coins")
+    .option("-t, --toplist <n>", "list of top n coins")
     .option("--disable-legend", "disable legend text")
     .parse(process.argv);
 
@@ -38,5 +39,6 @@ module.exports = {
     maxWidth: defaultTo(100)(param.width),
     maxHeight: defaultTo(14)(param.height),
     showCoinList: param.list,
+    topList: param.toplist,
     disableLegend: param.disableLegend,
 };

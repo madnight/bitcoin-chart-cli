@@ -5,10 +5,11 @@ const asciichart = require("asciichart");
 const moment = require("moment");
 const { map, flow, sortBy, remove, toLower } = require("lodash/fp");
 const { trim, negate, first, pad, max, min } = require("lodash/fp");
-const { currency, showCoinList } = require("./src/arguments.js");
+const { currency, showCoinList, topList } = require("./src/arguments.js");
 const { interpolateArray } = require("array-interpolatejs");
 const { CryptoCompareAPI } = require("./src/CryptoCompareAPI.js");
 const { print, normalize } = require("./src/utils.js");
+const { printTopList } = require("./src/toplist.js");
 
 const time = () =>
     flow(
@@ -86,4 +87,12 @@ const main = async () => {
               print(args.maxWidth < 65 ? smallLegend : legend);
 };
 
-(showCoinList && printCoins()) || main();
+if (showCoinList) {
+    printCoins();
+} else if (topList) {
+    printTopList();
+} else {
+    main();
+}
+
+// (showCoinList && )) || main();
