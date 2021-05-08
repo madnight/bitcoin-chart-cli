@@ -14,18 +14,20 @@ param
     .option("--min-range <n>", "min range between min and max y-axis value", parseInt)
     .option(
         "-c, --coin <string>",
-        "specify the coin e.g. ETH (Default: BTC)",
+        "specify the coin e.g. ETH",
         "BTC"
     )
     .option(
         "--currency <string>",
-        "specify the trading pair currency (Default: USD)",
+        "specify the trading pair currency",
         "USD"
     )
     .option("-l, --list", "list all available coins")
     .option("-t, --toplist <n>", "list of top n coins")
     .option("--disable-legend", "disable legend text")
+    .option("-ti, --technical-indicator <type...>", "add a technical indicator: RSI SMA BB EMA MACD")
     .parse(process.argv);
+
 
 module.exports = {
     days: defaultTo(90)(param.days),
@@ -34,6 +36,7 @@ module.exports = {
     coin: param.coin,
     max: param.max,
     min: param.min,
+    technicalIndicator: param.technicalIndicator,
     minRange: param.minRange,
     currency: param.currency,
     maxWidth: defaultTo(100)(param.width),

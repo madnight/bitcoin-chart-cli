@@ -16,7 +16,7 @@ class CryptoCompareAPI {
     static History(time, coin, currency, past) {
         return (
             `${CryptoCompareAPI.baseURL()}${time}?fsym=${coin}` +
-            `&tsym=${currency}&limit=${past}&e=CCCAGG` +
+            `&tsym=${currency}&limit=${past + 50}&e=CCCAGG` +
             CryptoCompareAPI.apiKey()
         );
     }
