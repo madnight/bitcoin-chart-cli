@@ -32,7 +32,7 @@
     "axios": "0.21.1",
     "chalk": "^4.1.1",
     "clear": "0.1.0",
-    "commander": "6.2.1",
+    "commander": "^7.2.0",
     "lodash": "4.17.21",
     "moment": "2.19.3",
     "technicalindicators": "^3.1.0"

@@ -1,8 +1,9 @@
-const param = require("commander");
+const { Command } = require('commander');
 const { version } = require("../package.json");
 const { defaultTo } = require("lodash/fp");
 
-param
+const program = new Command();
+program
     .version(version)
     .option("-d, --days <n>", "number of days the chart will go back", parseInt)
     .option("--hours <n>", "number of hours the chart will go back", parseInt)
@@ -28,6 +29,7 @@ param
     .option("-ti, --technical-indicator <type...>", "add a technical indicator: RSI SMA BB EMA MACD")
     .parse(process.argv);
 
+const param = program.opts();
 
 module.exports = {
     days: defaultTo(90)(param.days),
