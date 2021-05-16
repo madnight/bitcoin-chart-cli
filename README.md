@@ -9,7 +9,7 @@
 <a href="https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues"><img src="https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000" alt="Issue Count" /></a>
 <a href="https://snyk.io/test/github/madnight/bitcoin-chart-cli"><img src="https://snyk.io/test/github/madnight/bitcoin-chart-cli/badge.svg" alt="Known Vulnerabilities" /></a>
 <a href="https://david-dm.org/madnight/bitcoin-chart-cli"><img src="https://img.shields.io/david/madnight/bitcoin-chart-cli?cacheSeconds=3600" alt="dependencies Status" /></a>
- <br> <br>
+<br> <br>
 
 <img align="right" src="bitcoin-chart-cli.png" width="200">
 
@@ -20,8 +20,9 @@ mine [wallstreet](https://github.com/madnight/wallstreet), which provides inform
 stocks instead of cryptocurrencies.
 
 ### Requirements
- * node 8.0 or higher
- * npm or yarn
+
+- node 8.0 or higher
+- npm or yarn
 
 ### Usage
 
@@ -47,6 +48,7 @@ bitcoin-chart-cli --coin XRP -ti RSI SMA BB EMA MACD
 ```
 
 ### Options
+
 ```bash
 bitcoin-chart-cli --help
 
@@ -73,6 +75,7 @@ bitcoin-chart-cli --help
   -ti, --technical-indicator <type...>  add a technical indicator: RSI SMA BB EMA MACD
   -h, --help                            display help for command
 ```
+
 # Examples
 
 ![](https://i.imgur.com/8jXYkHc.png)
@@ -82,6 +85,7 @@ bitcoin-chart-cli
 ```
 
 ![](https://i.imgur.com/ijwaYXir.png)
+
 ```
 Create terminal splits (tmux) with watch for live charts the unix way
 watch -n 60 bitcoin-chart-cli --mins 30 --width 60
@@ -116,7 +120,6 @@ Rank  Name                        Price     MktCap     Volume   Change/24h
 ```
 
 ![image](https://user-images.githubusercontent.com/10064471/117548107-56bd4f80-b033-11eb-8f48-b16d2111cb0e.png)
-
 
 ```bash
 Charts with technical indicators

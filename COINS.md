@@ -1,7 +1,9 @@
-# List of supported cryptocurrencies 
+# List of supported cryptocurrencies
+
 Last update 2017/08
 
 `bitcoin-chart-cli --list`
+
 ```
 007 coin (007)
 0x (ZRX)

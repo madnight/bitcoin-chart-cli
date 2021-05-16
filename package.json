@@ -5,6 +5,7 @@
   "author": "Fabian Beuke <mail@beuke.org>",
   "description": "Bitcoin chart for the terminal as command line util",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "lint": "eslint .",
@@ -33,16 +34,18 @@
     "chalk": "^4.1.1",
     "clear": "0.1.0",
     "commander": "^7.2.0",
+    "fs": "^0.0.1-security",
     "lodash": "4.17.21",
     "moment": "2.29.1",
     "technicalindicators": "^3.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^6.2.1",
+    "eslint": "^7.26.0",
     "eslint-config-cleanjs": "^4.0.0",
     "eslint-plugin-better": "^0.1.5",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-react": "^7.23.2"
   }
 }
