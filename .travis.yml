@@ -1,9 +1,0 @@
-language: node_js
-
-node_js:
-  - "15"
-
-script:
-  - npm start
-  - npm test
-  - npm run lint
