@@ -8,7 +8,6 @@
 <a href="https://github.com/madnight/bitcoin-chart-cli/actions/workflows/CI.yml"><img src="https://img.shields.io/github/workflow/status/madnight/bitcoin-chart-cli/CI" alt="Build Status" /></a>
 <a href="https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues"><img src="https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000" alt="Issue Count" /></a>
 <a href="https://snyk.io/test/github/madnight/bitcoin-chart-cli"><img src="https://snyk.io/test/github/madnight/bitcoin-chart-cli/badge.svg" alt="Known Vulnerabilities" /></a>
-<a href="https://david-dm.org/madnight/bitcoin-chart-cli"><img src="https://img.shields.io/david/madnight/bitcoin-chart-cli?cacheSeconds=3600" alt="dependencies Status" /></a>
 <br> <br>
 
 <img align="right" src="bitcoin-chart-cli.png" width="200">
