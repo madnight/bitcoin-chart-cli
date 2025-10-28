@@ -30,7 +30,7 @@
   "dependencies": {
     "array-interpolatejs": "1.0.2",
     "asciichart": "1.5.25",
-    "axios": "0.28.0",
+    "axios": "0.30.2",
     "chalk": "^4.1.1",
     "clear": "0.1.0",
     "commander": "^7.2.0",
