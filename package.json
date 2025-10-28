@@ -30,7 +30,7 @@
   "dependencies": {
     "array-interpolatejs": "1.0.2",
     "asciichart": "1.5.25",
-    "axios": "0.28.0",
+    "axios": "^1.13.0",
     "chalk": "^4.1.1",
     "clear": "0.1.0",
     "commander": "^7.2.0",
@@ -40,7 +40,7 @@
     "technicalindicators": "^3.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.26.0",
     "eslint-config-cleanjs": "^4.0.0",
     "eslint-plugin-better": "^0.1.5",
