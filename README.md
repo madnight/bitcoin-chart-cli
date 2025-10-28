@@ -5,8 +5,6 @@
 <a href="https://npmjs.com/package/bitcoin-chart-cli"><img src="https://img.shields.io/npm/v/bitcoin-chart-cli.svg" alt="npm"/></a>
 <a href="https://nodejs.org/en/download/releases/"><img src="https://img.shields.io/badge/node-%3E%3D%208.0-brightgreen.svg" alt="License: MIT" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License: MIT" /></a>
-<a href="https://codeclimate.com/github/madnight/bitcoin-chart-cli/issues"><img src="https://codeclimate.com/github/madnight/bitcoin-chart-cli/badges/issue_count.svg?maxAge=2592000" alt="Issue Count" /></a>
-<a href="https://snyk.io/test/github/madnight/bitcoin-chart-cli"><img src="https://snyk.io/test/github/madnight/bitcoin-chart-cli/badge.svg" alt="Known Vulnerabilities" /></a>
 <br> <br>
 
 <img align="right" src="bitcoin-chart-cli.png" width="200">
@@ -17,25 +15,16 @@ You might also be interested in a similar project of <br>
 mine [wallstreet](https://github.com/madnight/wallstreet), which provides information about <br>
 stocks instead of cryptocurrencies.
 
-### Requirements
-
-- node 8.0 or higher
-- npm or yarn
+<br>
 
 ### Usage
 
 ```bash
-# install
-npm install bitcoin-chart-cli -g
-
-# (alternative) install with yarn
-yarn global add bitcoin-chart-cli
-
-# (alternative) run without install
+# run without install (requires npx)
 npx bitcoin-chart-cli
 
-# run default
-bitcoin-chart-cli
+# install
+npm install bitcoin-chart-cli -g
 
 # run with options
 bitcoin-chart-cli --coin ETH -d 360 -w 80 -h 20
