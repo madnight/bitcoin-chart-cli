@@ -1,10 +1,7 @@
 import TI from "technicalindicators"
 import args from "./arguments.js"
-import lodash from "lodash/fp.js"
 import asciichart from "asciichart"
 import { print, time, interpolate } from "./utils.js"
-
-const { map } = lodash
 
 export const getTechIndicator = (values) => {
   if (!args.technicalIndicator) return []
@@ -17,8 +14,8 @@ export const getTechIndicator = (values) => {
       values: values,
       stdDev: 2,
     })
-    const lower = map("lower", bb)
-    const upper = map("upper", bb)
+    const lower = bb.map(b => b.lower)
+    const upper = bb.map(b => b.upper)
     indicator = indicator.concat([lower, upper].map(interpolate))
   }
 
@@ -98,7 +95,7 @@ const printMACDChart = (values, padding) => {
     SimpleMAOscillator: false,
     SimpleMASignal: false,
   })
-  const vals = [map("MACD", m), map("signal", m)].map(interpolate)
+  const vals = [m.map(x => x.MACD), m.map(x => x.signal)].map(interpolate)
   print(
     "\n" +
       asciichart.plot(vals, {

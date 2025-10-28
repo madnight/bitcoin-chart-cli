@@ -1,14 +1,17 @@
-import axios from "axios"
-import chalk from "chalk"
 import args from "./arguments.js"
 
 const humanString = (i) =>
   (parseFloat(i) / (i < 1e9 ? 1e6 : 1e9)).toFixed(1) + (i < 1e9 ? "M" : "B")
 
-const percentColor = (i) => (i.includes("-") ? chalk.red(i) : chalk.green(i))
+// ANSI color codes
+const red = (text) => `\x1b[31m${text}\x1b[0m`
+const green = (text) => `\x1b[32m${text}\x1b[0m`
+
+const percentColor = (i) => (i.includes("-") ? red(i) : green(i))
 
 export const printTopList = async () => {
-  const { data } = await axios.get("https://api.coincap.io/v2/assets")
+  const response = await fetch("https://api.coincap.io/v2/assets")
+  const data = await response.json()
 
   process.stdout.write("Rank  Name                        Price     ")
   console.log("MktCap     Volume   Change/24h")

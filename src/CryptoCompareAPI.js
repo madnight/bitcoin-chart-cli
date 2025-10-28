@@ -1,8 +1,3 @@
-import lodash from "lodash/fp.js"
-import axios from "axios"
-
-const { get, map, flow } = lodash
-
 export class CryptoCompareAPI {
   // API Urls
   static baseURL() {
@@ -40,16 +35,16 @@ export class CryptoCompareAPI {
   }
 
   static async fetchCoinList() {
-    return flow(
-      get("data.Data"),
-      map("FullName")
-    )(await axios.get(CryptoCompareAPI.CoinList()))
+    const response = await fetch(CryptoCompareAPI.CoinList())
+    const json = await response.json()
+    return Object.values(json.Data).map(coin => coin.FullName)
   }
 
   static async fetchCoinHistory(time, coin, currency, past) {
-    const { data } = await axios.get(
+    const response = await fetch(
       CryptoCompareAPI.History(time, coin, currency, past)
     )
+    const data = await response.json()
     if (data.Response == "Error") {
       console.log(data.Message)
       process.exit(1)
@@ -58,6 +53,7 @@ export class CryptoCompareAPI {
   }
 
   static async fetchCoinPrice(coin, currency) {
-    return (await axios.get(CryptoCompareAPI.Current(coin, currency))).data
+    const response = await fetch(CryptoCompareAPI.Current(coin, currency))
+    return await response.json()
   }
 }

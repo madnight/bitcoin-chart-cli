@@ -1,8 +1,7 @@
 import { Command } from "commander"
-import _ from "lodash/fp.js"
-import * as fs from "fs"
+import { readFileSync } from "fs"
 
-const { version } = JSON.parse(fs.readFileSync("./package.json", "utf8"))
+const { version } = JSON.parse(readFileSync("./package.json", "utf8"))
 
 const program = new Command()
 program
@@ -33,7 +32,7 @@ program
 const param = program.opts()
 
 export default {
-  days: _.defaultTo(90)(param.days),
+  days: param.days ?? 90,
   mins: param.mins,
   hours: param.hours,
   coin: param.coin,
@@ -42,8 +41,8 @@ export default {
   technicalIndicator: param.technicalIndicator,
   minRange: param.minRange,
   currency: param.currency,
-  maxWidth: _.defaultTo(100)(param.width),
-  maxHeight: _.defaultTo(14)(param.height),
+  maxWidth: param.width ?? 100,
+  maxHeight: param.height ?? 14,
   showCoinList: param.list,
   topList: param.toplist,
   disableLegend: param.disableLegend,

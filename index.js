@@ -2,8 +2,6 @@
 
 import args from "./src/arguments.js"
 import asciichart from "asciichart"
-import moment from "moment"
-import lodash from "lodash/fp.js"
 import { CryptoCompareAPI } from "./src/CryptoCompareAPI.js"
 import { print, normalize, time, interpolate } from "./src/utils.js"
 import { printTopList } from "./src/toplist.js"
@@ -13,14 +11,13 @@ import {
   getTechIndicatorColors,
 } from "./src/technical-indicator.js"
 
-const { map, flow, sortBy, toLower, trim, pad, max, min } = lodash
-
-const printCoins = async () =>
-  flow(
-    map(trim),
-    sortBy(toLower),
-    map(print)
-  )(await CryptoCompareAPI.fetchCoinList())
+const printCoins = async () => {
+  const coins = await CryptoCompareAPI.fetchCoinList()
+  coins
+    .map(coin => coin.trim())
+    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    .forEach(coin => print(coin))
+}
 
 const getMinRange = (max, min) => {
   if (max - min > args.minRange) return []
@@ -29,11 +26,29 @@ const getMinRange = (max, min) => {
   return [max + range, min - range]
 }
 
+const formatDate = (date) => {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  let hours = date.getHours()
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const ampm = hours >= 12 ? 'pm' : 'am'
+  hours = hours % 12 || 12
+  hours = String(hours).padStart(2, '0')
+  return `${year}-${month}-${day} ${hours}:${minutes} ${ampm}`
+}
+
 const main = async () => {
   const [timePast, timeName, timeApi] = time()
-  const past = moment()
-    .subtract(timePast, timeName)
-    .format("YYYY-MM-DD hh:mm a")
+  const pastDate = new Date()
+  if (timeName === 'minutes') {
+    pastDate.setMinutes(pastDate.getMinutes() - timePast)
+  } else if (timeName === 'hours') {
+    pastDate.setHours(pastDate.getHours() - timePast)
+  } else if (timeName === 'days') {
+    pastDate.setDate(pastDate.getDate() - timePast)
+  }
+  const past = formatDate(pastDate)
 
   const fullHistroy = await CryptoCompareAPI.fetchCoinHistory(
     timeApi,
@@ -50,10 +65,10 @@ const main = async () => {
   const legend = baseLegend + ` since ${past}` + now
   const smallLegend = baseLegend + now
 
-  const fixed = normalize(max(history))
-  const fixedHist = map((x) => x.toFixed(fixed))(history).map(Number)
-  const padding = pad(2 + max(fixedHist).toString().length)("")
-  const [maxH, minH] = getMinRange(max(fixedHist), min(fixedHist))
+  const fixed = normalize(Math.max(...history))
+  const fixedHist = history.map((x) => Number(x.toFixed(fixed)))
+  const padding = " ".repeat(2 + Math.max(...fixedHist).toString().length)
+  const [maxH, minH] = getMinRange(Math.max(...fixedHist), Math.min(...fixedHist))
   const chart = getTechIndicator(fullHistroy).concat([fixedHist])
   try {
     print(
